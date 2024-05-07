@@ -6,13 +6,11 @@ interface JobCardProps {
   job: job;
 }
 
-
 const JobCard : React.FC<JobCardProps> = ({job}) => {
-  
+
   const setJob = useSetRecoilState(jobAtom);
 
   const deleteJob = (id:number) => {
-    console.log(id);
     setJob(prev => {
       const newJobs = prev.filter(job => {
         if(job.id !== id) {

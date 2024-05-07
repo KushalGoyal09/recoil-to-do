@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import JobInput from './components/JobInput';
 import SearchInput from './components/SearchInput';
 import JobCard from './components/JobCard';
@@ -9,19 +9,10 @@ import { useEffect } from 'react';
 function App() {
 
   const allJobs = useRecoilValue(filterJobs);
-  const [jobs,setjobs] = useRecoilState(jobAtom);
+  const jobs = useRecoilValue(jobAtom);
 
   useEffect(() => {
-    const storedJobs = localStorage.getItem('jobs');
-    if(storedJobs) {
-      setjobs(() => JSON.parse(storedJobs))
-    } else {
-      setjobs(() => []);  
-    }
-  },[])
-
-  useEffect(() => {
-    if(jobs && jobs.length > 0) {
+    if(jobs) {
       localStorage.setItem('jobs',JSON.stringify(jobs));
     }
   }, [jobs])

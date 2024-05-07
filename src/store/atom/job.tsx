@@ -1,4 +1,4 @@
-import {atom} from 'recoil';
+import {atom, selector} from 'recoil';
 
 export interface job {
     id: number,
@@ -8,6 +8,16 @@ export interface job {
 
 export const jobAtom = atom<job[]>({
     key: "jobAtom",
-    default: []
+    default: selector<job[]>({
+        key: "defaultAtomValue",
+        get: () => {
+            const storedJobs = localStorage.getItem('jobs');
+            if(storedJobs) {
+                return JSON.parse(storedJobs);
+            } else {
+                return [];
+            }
+        }
+    })
 });
 
