@@ -10,6 +10,9 @@ const JobInput = () => {
   const [description,setDescription] = useState<string>("");
 
   const submit = () => {
+    if(!title) {
+      return;
+    }
     const newjob:job = {
       id: Date.now(),
       title: title,

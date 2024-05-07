@@ -12,25 +12,16 @@ function App() {
   const [jobs,setjobs] = useRecoilState(jobAtom);
 
   useEffect(() => {
-    console.log("Effect 1")
-    console.log(jobs);
     const storedJobs = localStorage.getItem('jobs');
-    console.log(storedJobs)
     if(storedJobs) {
-      console.log(jobs);
       setjobs(() => JSON.parse(storedJobs))
-      console.log(jobs)
     } else {
-      console.log("bye")
-      setjobs(() => []);
+      setjobs(() => []);  
     }
-    console.log(jobs)
   },[])
 
   useEffect(() => {
-    console.log("Effect 2")
-    console.log(jobs)
-    if(jobs) {
+    if(jobs && jobs.length > 0) {
       localStorage.setItem('jobs',JSON.stringify(jobs));
     }
   }, [jobs])
